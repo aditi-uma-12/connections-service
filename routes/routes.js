@@ -13,9 +13,9 @@ router.get('/users', async (req, res) => {
         res.json(data);
     }
     catch (error) {
-        res.status(500).json({ message: error.message })
-    }
-});
+        res.status(500).json({ message: error.message });
+        console.log(error);
+}});
 
 router.post('/connection', async (req, res) => {
     const { user1, user2 }=req.query;
@@ -26,6 +26,8 @@ router.post('/connection', async (req, res) => {
 
     if(connection) {
         res.status(409).json({message: 'You two have already connected!'});
+        console.log('Already connected');
+
     }
     else{
     const newConnection = new Connection({
@@ -37,7 +39,9 @@ router.post('/connection', async (req, res) => {
         res.status(200).json({message: 'Connected successfully!', connection: dataToSave});
     }
     catch (error) {
-        res.status(400).json({ message: error.message })
+        res.status(400).json({ message: error.message });
+        console.log(error);
+
     }
 }
 })
