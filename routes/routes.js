@@ -17,6 +17,16 @@ router.get('/users', async (req, res) => {
         console.log(error);
 }});
 
+router.get('/connections', async (req, res) => {
+    try {
+        const data = await Connection.find();
+        res.json(data);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+        console.log(error);
+}});
+
 router.post('/connection', async (req, res) => {
     const { user1, user2 }=req.query;
 
